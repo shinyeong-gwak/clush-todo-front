@@ -1,8 +1,11 @@
 import react, {useState} from "react"
-import {ViewBox, TabItem} from "../../style/GlobalStyles";
+import {ViewBox, TabItem, FirstBoxContainer} from "../../style/GlobalStyles";
 import styled from "styled-components"
 import ButtonBox from "./ButtonBox";
 import TimeDetailView from "./TimeDetailView";
+import IncompleteView from "./IncompleteView";
+import TodoView from "./TodoView";
+import CalendarView from "./CalendarView";
 
 const TabsWrapper = styled.div`
   display: flex;
@@ -12,19 +15,14 @@ const TabsWrapper = styled.div`
   height: 100%;
 `;
 
-const FirstBoxContainer = styled.div`
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 2px;
-`;
 
 const CenterContainer = styled.div`
   display: flex;
+  width: 686px;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  
 `;
 
 export const Center = ({height}) => {
@@ -52,7 +50,11 @@ export const Center = ({height}) => {
         >할 일</TabItem>
       </TabsWrapper>
       <ViewBox height="612px">
-        {activeTab === 0 ? 'Tab 1 내용' : 'Tab 2 내용'}
+        {activeTab === 0 ? (
+          <CalendarView/>
+        ) : (
+          <TodoView/>
+        )}
       </ViewBox>
 
     </div>
@@ -62,7 +64,8 @@ export const Center = ({height}) => {
           <TimeDetailView></TimeDetailView>
       </div> ) : (
       <div className="TodoDetail">
-
+        <h3>미완료</h3>
+        <IncompleteView/>
       </div>
     )}
   </FirstBoxContainer>
