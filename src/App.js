@@ -1,5 +1,5 @@
 import './App.css';
-import Center from "./components/center/MainView";
+import Center from "./components/center/Center";
 
 
 function App() {
