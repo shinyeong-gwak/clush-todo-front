@@ -1,6 +1,7 @@
 import CategoryItemView from "./CategoryItemView";
-import styled from "styled-components";
 import {Container} from "../../style/GlobalStyles";
+import {getDelayedTodos, getTodos} from "../../api/CalendarAPI";
+import {useEffect, useState} from "react";
 
 
 // 항목 데이터
@@ -13,10 +14,36 @@ const items = [
     { tid: '6', priority: 3, complete: null, delay: false, name: '할 일 6', category: 'Other' },
 ];
 
-const IncompleteView = () => {
-    return <Container>
-        <CategoryItemView items = {items}></CategoryItemView>
-        </Container>;
+const IncompleteView = ({ fetch, setFetch }) => {
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchData = () => {
+            getDelayedTodos(localStorage.getItem('id'))
+                .then((data) => {
+                    setData(data);  // 데이터를 상태로 설정
+                    setLoading(false);  // 로딩 상태 업데이트
+                })
+                .catch((error) => {
+                    console.error('Error fetching todos:', error);
+                    setLoading(false);
+                });
+        };
+
+        fetchData();
+    }, [fetch]);
+
+    // 로딩 상태일 때 로딩 표시
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    return (
+        <Container>
+            <CategoryItemView items={data} fetch={fetch} setFetch={setFetch} />
+        </Container>
+    );
 };
 
 export default IncompleteView

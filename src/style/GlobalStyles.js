@@ -54,4 +54,62 @@ export const FirstBoxContainer = styled.div`
   flex-direction: column;
   display: flex;
   gap: 2px;
+  position:relative;
+`;
+
+export const BothSideContainer = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 10px 0;
+`;
+
+export const CategorySection = styled.div`
+  margin-bottom: 20px;
+`;
+
+export const CategoryHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+`;
+
+export const CategoryText = styled.span`
+  font-weight: bold;
+  margin: 0 10px;
+  text-align: center;
+  color: ${(props) => props.color || '#000'};
+`;
+
+export const Bar = styled.div`
+  width: 50%;
+  height: 1px;
+  background-color: ${(props) => props.color || '#000'};
+`;
+
+export const ListContainer = styled.div`
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  
+  background-color: #e1e1e1;
+  overflow: hidden;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+`;
+
+export const ListItem = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 8px 50px;
+  background-color: ${(props)=> props.color};
+  color: ${props => props.color === '#c1c4cd' ? '#606060' : 'black'};
+  font-size: 14px;
+  justify-content: ${props => props.align === 'center' ? 'center' : 'start'};
+  height: 50px;
+  box-sizing: border-box;
+  border-bottom: 0.5px solid #6378A4;
+  &:last-child {
+    border-bottom: none; // 마지막 항목은 하단 선 없앰
+  }
 `;

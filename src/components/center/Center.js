@@ -22,10 +22,13 @@ const CenterContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
   
 `;
 
 export const Center = ({height}) => {
+
+  const [fetch, setFetch] = useState([]);
   const handleEdit = () => {
     console.log('Edit button clicked');
   };
@@ -51,9 +54,9 @@ export const Center = ({height}) => {
       </TabsWrapper>
       <ViewBox height="612px">
         {activeTab === 0 ? (
-          <CalendarView/>
+          <CalendarView />
         ) : (
-          <TodoView/>
+          <TodoView fetch={fetch} setFetch={setFetch}/>
         )}
       </ViewBox>
 
@@ -65,7 +68,7 @@ export const Center = ({height}) => {
       </div> ) : (
       <div className="TodoDetail">
         <h3>미완료</h3>
-        <IncompleteView/>
+        <IncompleteView fetch={fetch} setFetch={setFetch} />
       </div>
     )}
   </FirstBoxContainer>
